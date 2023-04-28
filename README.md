@@ -17,6 +17,6 @@ uvicorn app:app --reload
 ```
 
 Can now interact with the API using swagger docs:
-http://127.0.0.1:8000/docs#/default/get\_file\_data\_uploadexcelfile__post
+http://127.0.0.1:8000/docs#/default/get_file_data_uploadexcelfile__post
 
 `Choose file` within the swagger can be used to select an Excel file.
