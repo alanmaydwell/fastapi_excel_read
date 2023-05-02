@@ -22,3 +22,11 @@ def extract_excel_rows(file_data):
     workbook = convert_bytes_like_to_excel_workbook(file_data)
     rows = extract_workbook_rows(workbook)
     return rows
+
+
+def simple_file_type_check(file_data, expected_start=[80, 75, 3, 4, 20, 0]):
+    """
+    Crude file type check based on finding particular byte sequence at start of files.
+    Empirically found to be [80, 75, 3, 4, 20, 0] for Excel files.
+    """
+    return list(file_data)[:len(expected_start)] == expected_start
