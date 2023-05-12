@@ -9,6 +9,13 @@ Python 3 and pipenv
 pipenv install
 ```
 
+### Setup SQLite database (will clear existing data if re-run)
+```
+cd data_layer
+python make_db.py
+```
+Note if `python` not recognised in the 2nd line, try `python3` instead.
+
 ### Launch
 
 ```
