@@ -71,12 +71,12 @@ def get_filenames():
 
 
 def get_file_details():
-    rows = run_query("select * from excel_files")
-    return rows
+    rows, headings = run_query("select * from excel_files")
+    return convert_rows_to_dicts(rows, headings)
 
 def get_payment_details():
-    rows = run_query("select * from payments")
-    return rows
+    rows, headings = run_query("select * from payments")
+    return convert_rows_to_dicts(rows, headings)
 
 
 def run_query(sql, params=()):
@@ -84,7 +84,12 @@ def run_query(sql, params=()):
         cursor = conn.cursor()
         cursor.execute(sql, params)
         rows = cursor.fetchall()
-    return rows
+        headings = [e[0] for e in cursor.description]
+    return rows, headings
+
+
+def convert_rows_to_dicts(rows, headings):
+    return  [{k:v for k, v in zip(headings, row)} for row in rows]
 
 
 
@@ -93,4 +98,7 @@ if __name__ == "__main__":
     #filenames = run_query("select * from excel_files")
     #print("key", key)
     #print(filenames)
-    key = record_payment(1, "0G935M", "CIVIL", 123.45)
+    # key = record_payment(1, "0G935M", "CIVIL", 123.45)
+    rows, headings = run_query("select * from payments")
+    new = convert_rows_to_dicts(rows, headings)
+    print(new)
